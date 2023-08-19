@@ -1,4 +1,3 @@
-from functions.util import verifica_idade
 
 class Venda:
     """
@@ -61,12 +60,3 @@ class Venda:
               f"Cpf do cliente:\t\t\t{self.cliente}\n"\
               f"Valor total da compra:\t\tR$ {self.valor_total:.2f}\n"\
               "------------------------------------------".replace('.', ',')
-
-    @staticmethod
-    def calcular_desconto(valor_total, data_de_nascimento):
-        if verifica_idade(data_de_nascimento) > 65:
-            valor_total *= 0.8    
-
-        elif valor_total > 150:
-            valor_total *= 0.9
-        return valor_total
