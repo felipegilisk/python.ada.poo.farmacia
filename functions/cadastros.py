@@ -4,14 +4,14 @@ from models.cliente import Cliente
 from models.medicamento import MedicamentoFitoterapico, MedicamentoQuimioterapico
 from models.venda import Venda
 from models.laboratorio import Laboratorio
-
+from functions.relatorio import carrega_registros
 
 
 def cadastros_iniciais():
     """
     Cria os cadastros iniciais de clientes, medicamentos e laboratorios
     """
-    with open('clientes.csv', 'w', newline='', encoding="UTF-8") as meu_csv:
+    with open('./dados/clientes.csv', 'w', newline='', encoding="UTF-8") as meu_csv:
         escritor = csv.writer(meu_csv, delimiter=';')
         escritor.writerow(['10010010017', 'Helena', '20/01/2001'])
         escritor.writerow(['20020020023', 'Patrícia', '20/02/2002'])
@@ -20,7 +20,7 @@ def cadastros_iniciais():
         escritor.writerow(['50050050050', 'Wesley', '15/12/1939'])
         escritor.writerow(['60060060060', 'Gislaine', '31/10/1950'])
 
-    with open('laboratorios.csv', 'w', newline='', encoding="UTF-8") as meu_csv:
+    with open('./dados/laboratorios.csv', 'w', newline='', encoding="UTF-8") as meu_csv:
         escritor = csv.writer(meu_csv, delimiter=';')
         escritor.writerow(['Bryo', '11975546464', 'Avenida Cem, S/N', 'Serra', 'ES'])
         escritor.writerow(['TheraSkin', '08000196660', 'Marginal Direita da, Rod. Anchieta, Km 13,5', 'Rudge Ramos', 'SP'])
@@ -30,21 +30,21 @@ def cadastros_iniciais():
         escritor.writerow(['Farmacam', '2126051349', 'Rua Coronel Serrado, 1630', 'São Gonçalo', 'RJ'])
         escritor.writerow(['EUROFARMA', '08007043876', 'Rua Brito Peixoto, 554', 'São Paulo', 'SP'])
 
-    with open('medicamentos_fito.csv', 'w', newline='', encoding="UTF-8") as meu_csv:
+    with open('./dados/medicamentos_fito.csv', 'w', newline='', encoding="UTF-8") as meu_csv:
         escritor = csv.writer(meu_csv, delimiter=';')
         escritor.writerow([1,'Camomilina', 'Camomila', 'TheraSkin', 'Cicatrizante com ação anti-inflamatória', '20.30'])
         escritor.writerow([2,'Vick Vaporub', 'Eucalipto', 'PROCTER & GAMBLE', 'Expectorante e broncodilatador', '14.99'])
         escritor.writerow([3,'Casca de Salgueiro Branco', 'Salgueiro', 'Farmacam', 'Alivio das articulações e conforto muscular', '10.15'])
         escritor.writerow([4,'Aloe vera extrato', 'Babosa', 'Bryo', 'Cicatrizante com ação anti-inflamatória','11.00'])
 
-    with open("medicamentos_quimi.csv", 'w', newline='', encoding="UTF-8") as meu_csv:
+    with open("./dados/medicamentos_quimi.csv", 'w', newline='', encoding="UTF-8") as meu_csv:
         escritor = csv.writer(meu_csv, delimiter=';')
         escritor.writerow([1,'Genuxal', 'Ciclofosfamida', 'Baxter', 'Tratamento de tumores malígnos e doenças do sistema imunológico', '69.00', 'S'])
         escritor.writerow([2,'Taxol', 'Paclitaxel', 'Bristol-Myers Squibb', 'Tratamento adjuvante do câncer de mama linfonodo positivo', '81.00', 'N'])
         escritor.writerow([3,'Gemzar', 'Cloridrato de gencitabina', 'EUROFARMA', 'Tratamento de pacientes com câncer de bexiga e adenocarcinoma do pâncreas', '413.00', 'S'])
         escritor.writerow([4,'Norelbin', 'Vinorelbina', 'EUROFARMA', 'Tratamento de recidiva de câncer de mama', '186.00', 'N'])
 
-    with open("vendas.csv", 'w', newline='', encoding="UTF-8") as meu_csv:
+    with open("./dados/vendas.csv", 'w', newline='', encoding="UTF-8") as meu_csv:
         escritor = csv.writer(meu_csv, delimiter=';')
 
 
@@ -81,11 +81,11 @@ def cadastra_medicamento(fitoterapico: bool= True):
     Método para cadastro de medicamentos fitoterapicos e quimioterapicos
     """
 
-    id = ""
-    while len(id) == 0:
-      id = input("Digite o id do medicamento: ")
-      if len(id) == 0:
-        print("Id inválido!")
+    # id = ""
+    # while len(id) == 0:
+    #   id = input("Digite o id do medicamento: ")
+    #   if len(id) == 0:
+    #     print("Id inválido!")
 
     nome = ""
     while len(nome) == 0:
@@ -114,10 +114,14 @@ def cadastra_medicamento(fitoterapico: bool= True):
         print("Valor inválido!")
 
     if fitoterapico is True:
-        return MedicamentoFitoterapico(nome, principal_composto, laboratorio, descricao, valor)
+        id = 0
+        medicamentos_fitoterapicos = carrega_registros('medicamentos_fito')
+        for medicamento in  medicamentos_fitoterapicos:
+            id = int(medicamento.id[-1]) + 1
+        print(id)
+        return MedicamentoFitoterapico(id,nome, principal_composto, laboratorio, descricao, valor)
     else:
         pass
-    necessita_receita = "" #Necessita receita
 
 
 def grava_registro(obj):
@@ -125,26 +129,26 @@ def grava_registro(obj):
     Guarda os dados do objeto novo no respectivo arquivo
     """
     if isinstance(obj, Cliente):
-        with open('clientes.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
+        with open('./dados/clientes.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
             escritor = csv.writer(meu_csv, delimiter=';')
             escritor.writerow([obj.cpf, obj.nome, obj.data_de_nascimento.strftime('%d/%m/%Y')])
 
     elif isinstance(obj, Laboratorio):
-        with open('laboratorios.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
+        with open('./dados/laboratorios.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
             escritor = csv.writer(meu_csv, delimiter=';')
             escritor.writerow([obj.nome, obj.telefone, obj.endereco, obj.cidade, obj.estado])
 
     elif isinstance(obj, MedicamentoFitoterapico):
-        with open('medicamentos_fito.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
+        with open('./dados/medicamentos_fito.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
             escritor = csv.writer(meu_csv, delimiter=';')
             escritor.writerow([obj.id,obj.nome, obj.principal_composto, obj.laboratorio, obj.descricao, obj.valor])
 
     elif isinstance(obj, MedicamentoFitoterapico):
-        with open('medicamentos_fito.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
+        with open('./dados/medicamentos_fito.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
             escritor = csv.writer(meu_csv, delimiter=';')
             escritor.writerow([obj.id,obj.nome, obj.principal_composto, obj.laboratorio, obj.descricao, 'S' if obj.necessita_receita else 'N', obj.valor])
     
     elif isinstance(obj, Venda):
-        with open('vendas.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
+        with open('./dados/vendas.csv', 'a', newline='', encoding="UTF-8") as meu_csv:
             escritor = csv.writer(meu_csv, delimiter=';')
             escritor.writerow([obj.data, obj.hora, obj.produtos_vendidos, obj.cliente, str(obj.valor_total)])

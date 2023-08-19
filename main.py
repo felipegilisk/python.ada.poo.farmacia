@@ -67,7 +67,8 @@ def main():
             # Opção de Medicamentos Quimioterápicos
             elif opcao_1 == '2':
                 if opcao_2 == '1':
-                    novo_medicamento = cadastra_medicamento()
+                    novo_medicamento = cadastra_medicamento(fitoterapico=False)
+                    grava_registro(novo_medicamento)
 
                 elif opcao_2 == '2':
                     pass
@@ -84,6 +85,7 @@ def main():
             elif opcao_1 == '3':
                 if opcao_2 == '1':
                     novo_medicamento = cadastra_medicamento()
+                    grava_registro(novo_medicamento)
 
                 elif opcao_2 == '2':
                     pass
@@ -102,80 +104,83 @@ def main():
             valor_total = 0
             lista_dos_medicamentos_vendidos = []
             cpf_venda = ""
+            cliente_encontrado = ''
             while len(cpf_venda) != 11 or not cpf_venda.isdigit():
-                    cpf_venda = input("Digite o Cpf do cliente cadastrado: ")
-                    if len(cpf_venda) != 11 or not cpf_venda.isdigit():
-                        print("CPF inválido!")
-                    else:
-                        cliente_encontrado = localizar(carrega_registros('clientes'), 'cpf', cpf_venda)                                      
-                                    
-            print()
-            while opcao == '0':
-                opcao_venda = menu_vendas()        
-                if opcao_venda == '1':
-                    medicamentos_quimio = carrega_registros('medicamentos_quimi')           
-                    for medicamento in medicamentos_quimio:
-                        print(medicamento)
-                    print()
-                    id_medicamento = input('Escolha o ID do medicamento que deseja incluir no carrinho: ')
-                    for medicamento in medicamentos_quimio:
-                        if id_medicamento == medicamento.id:
-                            if medicamento.necessita_receita == True:
-                                verificar_receita = input(f"ATENÇÃO! O medicamento '{medicamento.nome}' é de uso controlado. Você possui a receita? (S/N): ")
-                                if verificar_receita.upper() == "S":
-                                    qtd_medicamento = int(input('Digite a quantidade desejada: '))
-                                    valor_medicamento = 1 * qtd_medicamento
-                                    lista_dos_medicamentos_vendidos.append(medicamento.nome) 
-                                    valor_total += valor_medicamento
+                cpf_venda = input("Digite o Cpf do cliente cadastrado: ")
+                if len(cpf_venda) != 11 or not cpf_venda.isdigit():
+                    print("CPF inválido!")
+                else:
+                    cliente_encontrado = localizar(carrega_registros('clientes'), 'cpf', cpf_venda)
+                    if cliente_encontrado is None:
+                        print("\n::: Cliente NÃO localizado :::")
+
+                    elif cliente_encontrado is not None:
+                        while opcao == '0':
+                            opcao_venda = menu_vendas()        
+                            if opcao_venda == '1':
+                                medicamentos_quimio = carrega_registros('medicamentos_quimi')           
+                                for medicamento in medicamentos_quimio:
+                                    print(medicamento)
+                                print()
+                                id_medicamento = input('Escolha o ID do medicamento que deseja incluir no carrinho: ')
+                                for medicamento in medicamentos_quimio:
+                                    if id_medicamento == medicamento.id:
+                                        if medicamento.necessita_receita == True:
+                                            verificar_receita = input(f"ATENÇÃO! O medicamento '{medicamento.nome}' é de uso controlado. Você possui a receita? (S/N): ")
+                                            if verificar_receita.upper() == "S":
+                                                qtd_medicamento = int(input('Digite a quantidade desejada: '))
+                                                valor_medicamento = 1 * qtd_medicamento
+                                                lista_dos_medicamentos_vendidos.append(medicamento.nome) 
+                                                valor_total += valor_medicamento
+                                            else:
+                                                print("É necessario a receita do medicamento solicitado.")
+                                        else:
+                                            qtd_medicamento = int(input('Digite a quantidade desejada: '))
+                                            valor_medicamento = medicamento.valor * qtd_medicamento
+                                            lista_dos_medicamentos_vendidos.append(medicamento.nome) 
+                                            valor_total += valor_medicamento
+                                print()
+                                opcao = input('Deseja adicionar outro medicamento: 1 - Sim ou 2 - Não: ')
+                                print()
+                                if opcao == '1':
+                                    opcao = '0'
                                 else:
-                                    print("É necessario a receita do medicamento solicitado.")
-                            else:
-                                qtd_medicamento = int(input('Digite a quantidade desejada: '))
-                                valor_medicamento = medicamento.valor * qtd_medicamento
-                                lista_dos_medicamentos_vendidos.append(medicamento.nome) 
-                                valor_total += valor_medicamento
-                    print()
-                    opcao = input('Deseja adicionar outro medicamento: 1 - Sim ou 2 - Não: ')
-                    print()
-                    if opcao == '1':
-                        opcao = '0'
-                    else:
-                        data = date.today().strftime('%d/%m/%Y')
-                        hora = datetime.now().strftime("%H:%M:%S")
-                        valor_com_desconto = Venda.calcular_desconto(valor_total, cliente_encontrado.data_de_nascimento)
+                                    data = date.today().strftime('%d/%m/%Y')
+                                    hora = datetime.now().strftime("%H:%M:%S")
+                                    valor_com_desconto = Venda.calcular_desconto(valor_total, cliente_encontrado.data_de_nascimento)
 
-                        venda = Venda(data,hora,lista_dos_medicamentos_vendidos, cliente_encontrado.cpf, valor_com_desconto)
-                        print('Venda Realizada com sucesso!! ')
-                        print(venda)
-                        grava_registro(venda)
+                                    venda = Venda(data,hora,lista_dos_medicamentos_vendidos, cliente_encontrado.cpf, valor_com_desconto)
+                                    print('Venda Realizada com sucesso!! ')
+                                    print(venda)
+                                    grava_registro(venda)
 
-                elif opcao_venda == '2':
-                    medicamentos_fito = carrega_registros('medicamentos_fito')
-                    for medicamento in medicamentos_fito:
-                        print(medicamento)
-                    print()    
-                    id_medicamento = input('Escolha o ID do medicamento que deseja incluir no carrinho: ')
-                    for medicamento in medicamentos_fito:
-                        if id_medicamento == medicamento.id:
-                            qtd_medicamento = int(input('Digite a quantidade desejada: '))
-                            valor_medicamento = medicamento.valor * qtd_medicamento
-                            lista_dos_medicamentos_vendidos.append(medicamento.nome) 
-                            valor_total += valor_medicamento
-                                        
-                    print()
-                    opcao = input('Deseja adicionar outro medicamento: 1 - Sim ou 2 - Não: ')
-                    print()
-                    if opcao == '1':
-                        opcao = '0'
-                    else:
-                        data = date.today().strftime('%d/%m/%Y')
-                        hora = datetime.now().strftime("%H:%M:%S")
-                        Venda.calcular_desconto(valor_total, cliente_encontrado.data_de_nascimento)
+                            elif opcao_venda == '2':
+                                medicamentos_fito = carrega_registros('medicamentos_fito')
+                                for medicamento in medicamentos_fito:
+                                    print(medicamento)
+                                print()    
+                                id_medicamento = input('Escolha o ID do medicamento que deseja incluir no carrinho: ')
+                                for medicamento in medicamentos_fito:
+                                    if id_medicamento == medicamento.id:
+                                        qtd_medicamento = int(input('Digite a quantidade desejada: '))
+                                        valor_medicamento = medicamento.valor * qtd_medicamento
+                                        lista_dos_medicamentos_vendidos.append(medicamento.nome) 
+                                        valor_total += valor_medicamento
+                                                    
+                                print()
+                                opcao = input('Deseja adicionar outro medicamento: 1 - Sim ou 2 - Não: ')
+                                print()
+                                if opcao == '1':
+                                    opcao = '0'
+                                else:
+                                    data = date.today().strftime('%d/%m/%Y')
+                                    hora = datetime.now().strftime("%H:%M:%S")
+                                    Venda.calcular_desconto(valor_total, cliente_encontrado.data_de_nascimento)
 
-                        venda = Venda(data,hora,lista_dos_medicamentos_vendidos, cliente_encontrado.cpf, valor_total)
-                        print('Venda Realizada com sucesso!! ')
-                        print(venda)
-                        grava_registro(venda)
+                                    venda = Venda(data,hora,lista_dos_medicamentos_vendidos, cliente_encontrado.cpf, valor_total)
+                                    print('Venda Realizada com sucesso!! ')
+                                    print(venda)
+                                    grava_registro(venda)
 
 
         elif opcao_1 == '5':

@@ -140,12 +140,13 @@ def carrega_registros(tipo: str):
       - 'medicamentos_quimi'
       - 'medicamentos_fito'
       - 'laboratorios'
+      - 
     """
-    if tipo not in ('clientes', 'medicamentos_quimi', 'medicamentos_fito', 'laboratorios'):
+    if tipo not in ('clientes', 'medicamentos_quimi', 'medicamentos_fito', 'laboratorios', 'vendas'):
         lista = None
     else:
         lista = list()
-        with open(f'{tipo}.csv', 'r', newline='', encoding="UTF-8") as meu_csv:
+        with open(f'./dados/{tipo}.csv', 'r', newline='', encoding="UTF-8") as meu_csv:
             leitor = csv.reader(meu_csv, delimiter=';')
             if tipo == 'clientes':
                 for linha in leitor:
@@ -163,4 +164,8 @@ def carrega_registros(tipo: str):
                 for linha in leitor:
                     med_quimi = MedicamentoQuimioterapico(linha[0], linha[1], linha[2], linha[3], linha[4], float(linha[5]), True if linha[6] == 'S' else False)
                     lista.append(med_quimi)
+            elif tipo == 'vendas':
+                for linha in leitor:
+                    venda = Venda(linha[0], linha[1], linha[2], linha[3], float(linha[4]))
+                    lista.append(venda)
     return lista
