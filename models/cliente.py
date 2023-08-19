@@ -43,3 +43,11 @@ class Cliente:
         Definição do método comparativo entre 2 objetos, ordenando pelo nome
         """
         return self.nome < outro_cliente.nome
+
+
+    def verifica_idade(self):
+        data_agora = date.today()
+        idade = data_agora.year - self.data_de_nascimento.year
+        if data_agora.replace(year=self.data_de_nascimento.year) < self.data_de_nascimento:
+            idade -= 1
+        return idade
