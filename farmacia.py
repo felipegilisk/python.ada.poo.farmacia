@@ -6,9 +6,9 @@ from view.CLI import *
 
 def main():
     controller = FarmaciaController()
-
     while True:
-        os.system("clear" if os.name != "nt" else "cls")
+        clear_cli()
+        main_app_header()
         menu = '''
         Boas vindas ao nosso sistema:
 
@@ -19,6 +19,7 @@ def main():
         0 - Sair
         '''
         print(menu)
+        print_footer_divider()
 
         opcao_1 = input('Escolha uma opção: ')
         carrinho = []
@@ -54,6 +55,7 @@ def main():
 
             # Opção de Medicamentos
             elif opcao_1 == '2':
+                clear_cli()
                 if opcao_2 == '1':
                     controller.drug_controller.cadastrar_medicamento()
                 elif opcao_2 == '2':
@@ -120,6 +122,8 @@ def main():
             break
         else:
             print('A opção escolhida é inválida!! ')
+
+        input("Pressione Enter para continuar...")
 
 
 if __name__ == '__main__':
