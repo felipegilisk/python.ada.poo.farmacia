@@ -106,7 +106,6 @@ class FarmaciaFileDB:
             self._data[target_db] = mapped_db
 
         print(f"FileDB Engine | Inicialização >> Remapeamento da base de dados bem-sucedida.")
-        sleep(5)
         os.system("clear" if os.name != "nt" else "cls")
 
     def write(self, data: Cliente | Laboratorio | Medicamento | Venda) -> None:
@@ -157,9 +156,9 @@ class FarmaciaFileDB:
         for db_idx in target_db_data.keys():
             db_object = target_db_data[db_idx].__getattribute__(target_field)
             if lazy_mode:
-                match = db_object in search_value
+                match = search_value in db_object
             else:
-                match = db_object == search_value
+                match = search_value == db_object
 
             if match and return_first:
                 return target_db_data[db_idx]
