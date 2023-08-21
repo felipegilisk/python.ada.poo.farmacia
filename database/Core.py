@@ -33,8 +33,8 @@ class FarmaciaFileDB:
             "medicamentos": {
                 "file": f"{self._data_path}medicamentos.{self._mode}",
                 "map": (
-                    "nome", "principal_composto", "laboratorio", "descricao",
-                    "valor_unitario", "receita_necessaria", "tipo_medicamento"
+                    "identificador", "nome", "principal_composto", "laboratorio",
+                    "descricao", "valor_unitario", "receita_necessaria", "tipo_medicamento"
                 ),
                 "class": Medicamento
             },
@@ -168,7 +168,9 @@ class FarmaciaFileDB:
         if target_db not in self._mapping.keys():
             raise ValueError(f"FarmáciaDB | Busca >> A base de dados \"{target_db}\" não existe.")
         if target_field not in self._mapping[target_db]["map"]:
-            raise ValueError(f"FarmáciaDB | Busca >> A chave \"{target_db}\" não é valida para a base \"{target_db}\".")
+            raise ValueError(
+                f"FarmáciaDB | Busca >> A chave \"{target_field}\" não é valida para a base \"{target_db}\"."
+            )
 
         target_db_data = self.read(target_db=target_db)
         match_data: List[Cliente | Laboratorio | Medicamento | Venda] = []
