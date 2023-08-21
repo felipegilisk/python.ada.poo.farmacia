@@ -106,7 +106,7 @@ class Medicamento:
 
         fmt_str = (
             f"| {self.identificador :0>6} | {nome_short :^30} |"
-            f"{receita_obr_str :^20} | R$ {valor_fmt_str :>11} | {tipo_short :^8} |\n"
+            f"{receita_obr_str :^20} | R$ {valor_fmt_str :>11} | {tipo_short :^8} |"
         )
         return fmt_str
 
