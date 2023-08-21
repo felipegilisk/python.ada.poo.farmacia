@@ -1,6 +1,8 @@
+import os
+
 from database.Core import FarmaciaFileDB
 from models.Medicamento import Medicamento
-from view.CLI import print_drug_header, print_footer_divider
+from view.CLI import print_drug_header, print_footer_divider, drug_top_header
 
 
 class MedicamentoController:
@@ -23,6 +25,7 @@ class MedicamentoController:
         return tuple(self._db.read(target_db="medicamentos").values())
 
     def buscar_medicamento(self) -> None:
+        os.system("clear" if os.name != "nt" else "cls")
         busca = input("Digite os termos de busca separados por vírgula: ")
         termos = [termo.strip() for termo in busca.split(",")]
 
@@ -38,6 +41,7 @@ class MedicamentoController:
             print("Nenhum medicamento foi encontrado para os termos de busca informados!")
             return None
 
+        drug_top_header()
         print_drug_header()
         for resultado in resultados:
             print(resultado.__str__(), sep="")
