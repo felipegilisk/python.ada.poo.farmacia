@@ -1,3 +1,5 @@
+import os
+
 from controller.Farmacia import FarmaciaController
 from view.CLI import *
 
@@ -6,6 +8,7 @@ def main():
     controller = FarmaciaController()
 
     while True:
+        os.system("clear" if os.name != "nt" else "cls")
         menu = '''
         Boas vindas ao nosso sistema:
 
