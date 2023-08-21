@@ -108,6 +108,24 @@ class FarmaciaFileDB:
         print(f"FileDB Engine | Inicialização >> Remapeamento da base de dados bem-sucedida.")
         os.system("clear" if os.name != "nt" else "cls")
 
+    @staticmethod
+    def _remap_for_write(data: dict) -> dict:
+        """
+        Realiza o remapeamento dos dados da base informada para o formato JSON-Compatible, permitindo a escrita no
+        arquivo de persistência.
+
+        Parameters:
+            data (dict): Base de dados em memória com o mapeamento Key: Object original.
+
+        Returns:
+            dict: Base de dados em dict remapeada e compatível para escrita em formato JSON.
+        """
+        remaped_data = {
+            idx: obj_data.__dict__()
+            for idx, obj_data in zip(data.keys(), data.values())
+        }
+        return remaped_data
+
     def write(self, data: Cliente | Laboratorio | Medicamento | Venda) -> None:
         """
         Realiza a escrita dos dados na base de dados ativa em Memória e atualiza o arquivo de persistência JSON da base.
@@ -115,9 +133,10 @@ class FarmaciaFileDB:
         Parameters:
             data (Cliente | Laboratorio | Medicamento | Venda): Objeto para ser escrito na base de dados.
         """
-        target_data, staged_data = self._map_new_data(staged_data=data)
-        with open(f"{self._mapping.get(target_data)}", "w", newline='', encoding="UTF-8") as target_file_db:
-            json.dump(self._data[target_data], target_file_db, ensure_ascii=False, indent=4)
+        target_data, _ = self._map_new_data(staged_data=data)
+        with open(f"{self._mapping.get(target_data)['file']}", "w", newline='', encoding="UTF-8") as target_file_db:
+            remapped_data = self._remap_for_write(data=self._data[target_data])
+            json.dump(remapped_data, target_file_db, ensure_ascii=False, indent=4)
 
         print(f"FarmáciaDB | Escrita >> Base de dados \"{target_data}\" PERSISTENTE atualizada com sucesso.")
 
