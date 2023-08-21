@@ -34,7 +34,6 @@ class MedicamentoController:
             )
             resultados.extend(resultados_termo)
 
-        print(resultados)
         if len(resultados) == 0:
             print("Nenhum medicamento foi encontrado para os termos de busca informados!")
             return None
