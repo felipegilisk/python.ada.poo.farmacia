@@ -1,6 +1,10 @@
 import os
 
 
+def clear_cli():
+    os.system("clear" if os.name != "nt" else "cls")
+
+
 def print_drug_header() -> None:
     print("|   ID   |              Nome              | Receita Obrigatória | Valor Unitário |   Tipo   |")
 
@@ -21,11 +25,23 @@ def drug_top_header() -> None:
     )
 
 
+def main_app_header() -> None:
+    print(
+        "|-------------------------------------------------------------------------------------------|"
+    )
+    print(
+        "|                                        SIGFarm-ADA                                        |"
+    )
+    print(
+        "|-------------------------------------------------------------------------------------------|"
+    )
+
+
 def menu_interno(opcao: str):
     """
     Segundo menu de navegação
     """
-    os.system("clear" if os.name != "nt" else "cls")
+
     switch_opcao = {
         '1': 'Clientes',                        1: 'Clientes',
         '2': 'Medicamentos',                    2: 'Medicamentos',
@@ -42,7 +58,11 @@ def menu_interno(opcao: str):
 
     opcao_selecionada = '0'
     while opcao_selecionada not in ('1', '2', '3', '4'):
+        clear_cli()
+        main_app_header()
         print(menu_atual)
+        print_footer_divider()
+
         opcao_selecionada = input("Escolha uma opção: ")
 
         if opcao_selecionada not in ('1', '2', '3', '4'):
