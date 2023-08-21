@@ -2,6 +2,10 @@ def print_drug_header() -> None:
     print("|   ID   |              Nome              | Receita Obrigatória | Valor Unitário |   Tipo   |")
 
 
+def print_footer_divider() -> None:
+    print("|-------------------------------------------------------------------------------------------|")
+
+
 def menu_interno(opcao: str):
     """
     Segundo menu de navegação
