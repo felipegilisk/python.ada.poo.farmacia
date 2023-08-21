@@ -55,7 +55,6 @@ def main():
                     controller.drug_controller.cadastrar_medicamento()
                 elif opcao_2 == '2':
                     controller.drug_controller.buscar_medicamento()
-
                 elif opcao_2 == '3':
                     drug_top_header()
                     medicamentos = controller.drug_controller.recuperar_medicamentos()
