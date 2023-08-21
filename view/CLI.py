@@ -1,3 +1,6 @@
+import os
+
+
 def print_drug_header() -> None:
     print("|   ID   |              Nome              | Receita Obrigatória | Valor Unitário |   Tipo   |")
 
@@ -22,6 +25,7 @@ def menu_interno(opcao: str):
     """
     Segundo menu de navegação
     """
+    os.system("clear" if os.name != "nt" else "cls")
     switch_opcao = {
         '1': 'Clientes',                        1: 'Clientes',
         '2': 'Medicamentos',                    2: 'Medicamentos',
@@ -44,20 +48,4 @@ def menu_interno(opcao: str):
         if opcao_selecionada not in ('1', '2', '3', '4'):
             print("Opção inválida!")
 
-    return opcao_selecionada
-
-
-def menu_vendas():
-    menu_atual = f""" ::: Menu Vendas :::
-    1 - Medicamentos Quimioterápicos
-    2 - Medicamentos Fitoterápicos
-    
-    """
-    opcao_selecionada = '0'
-    while opcao_selecionada not in ('1', '2'):
-        print(menu_atual)
-        opcao_selecionada = input("Escolha o tipo de medicamento que deseja adicionar ao carrinho ")
-        if opcao_selecionada not in ('1', '2'):
-            print("Opção inválida!")
-            
     return opcao_selecionada
