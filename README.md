@@ -38,11 +38,13 @@ python3 farmacia.py
 - 📂 `database/` - Python Package containing all modules related to the data management of this system.
     - 📂 `data/` - Folder containing the persistent `JSON` database files for the `FileDB Engine`. 
     - 🔖 `Core.py` - Python Module for the `FileDB Engine` developed for this project (class `FarmaciaFileDB`).
-- 📂 `models/` - Python Package containing all Model Modules with its classes. 
+- 📂 `model/` - Python Package containing all Model Modules with its classes. 
     - 🔖 `Cliente.py` - Python Module for the User Model (class `Cliente`).
     - 🔖 `Laboratorio.py` - Python Module for the Laboratory Model (class `Laboratorio`).
     - 🔖 `Medicamento.py` - Python Module for the Drug Model (class `Medicamento`).
     - 🔖 `Venda.py` - Python Module for the Sale Model (class `Venda`).
+- 📂 `view/` - Python Package containing View Modules for the system. 
+    - 🔖 `CLI.py` - Python Module for the main Command-Line Interface.
 - 🔖 `farmacia.py` - Main Python Executable for the system.
 ---
 

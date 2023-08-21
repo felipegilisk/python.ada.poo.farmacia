@@ -38,11 +38,13 @@ python3 farmacia.py
 - 📂 `database/` - Pacote Python contendo todos os módulos relacionados ao gerenciamento de dados do projeto.
     - 📂 `data/` - Pasta contendo todos os arquivos de persistência `JSON` para a base com o `FileDB Engine`. 
     - 🔖 `Core.py` - Módulo Python para o `FileDB Engine` desenvolvido para este projeto (classe `FarmaciaFileDB`).
-- 📂 `models/` - Pacote Python contendo todos os módulos de modelos para o projeto. 
+- 📂 `model/` - Pacote Python contendo todos os módulos de modelos para o projeto. 
     - 🔖 `Cliente.py` - Módulo Python para o modelo de Cliente (classe `Cliente`).
     - 🔖 `Laboratorio.py` - Módulo Python para o modelo de Laboratório (classe `Laboratorio`).
     - 🔖 `Medicamento.py` - Módulo Python para o modelo de Medicamento (classe `Medicamento`).
     - 🔖 `Venda.py` - Módulo Python para o modelo de Venda (classe `Venda`).
+- 📂 `view/` - Pacote Python contendo os módulos de visualização do sistema. 
+    - 🔖 `CLI.py` - Módulo Python responsável pela Interface de Linha de Comando do sistema (CLI).
 - 🔖 `farmacia.py` - Executável Python principal para o sistema.
 ---
 
