@@ -15,8 +15,8 @@ class ClienteController:
         self._db = database
 
     def recuperar_clientes(self, cpf: str | None = None) -> Cliente | tuple:
-        fmt_cpf = self._format_cpf(u_cpf=cpf)
         if cpf is not None:
+            fmt_cpf = self._format_cpf(u_cpf=cpf)
             cliente = self._db.search(
                 target_db="clientes", target_field="cpf", search_value=fmt_cpf, lazy_mode=False
             )
