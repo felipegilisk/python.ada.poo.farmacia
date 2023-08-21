@@ -54,26 +54,15 @@ def main():
                 if opcao_2 == '1':
                     controller.drug_controller.cadastrar_medicamento()
                 elif opcao_2 == '2':
-                    pass
-                    # TO DO
+                    controller.drug_controller.buscar_medicamento()
 
                 elif opcao_2 == '3':
-                    print(
-                        "|-------------------------------------------------------------------------------------------|"
-                    )
-                    print(
-                        "|                                   Lista de Medicamentos                                   |"
-                    )
-                    print(
-                        "|-------------------------------------------------------------------------------------------|"
-                    )
+                    drug_top_header()
                     medicamentos = controller.drug_controller.recuperar_medicamentos()
                     print_drug_header()
                     for med in medicamentos:
-                        print(med.__str__(), end="")
-                    print(
-                        "|-------------------------------------------------------------------------------------------|"
-                    )
+                        print(med.__str__())
+                    print_footer_divider()
 
         # Opção de Vendas
         elif opcao_1 == '3':
