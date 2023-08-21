@@ -1,5 +1,6 @@
 from database.Core import FarmaciaFileDB
 from models.Medicamento import Medicamento
+from view.CLI import print_drug_header, print_footer_divider
 
 
 class MedicamentoController:
@@ -33,12 +34,15 @@ class MedicamentoController:
             )
             resultados.extend(resultados_termo)
 
+        print(resultados)
         if len(resultados) == 0:
             print("Nenhum medicamento foi encontrado para os termos de busca informados!")
             return None
 
+        print_drug_header()
         for resultado in resultados:
-            print(resultado.__str__())
+            print(resultado.__str__(), sep="")
+        print_footer_divider()
 
     def cadastrar_medicamento(self) -> None:
         nome = ""
