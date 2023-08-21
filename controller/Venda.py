@@ -1,9 +1,9 @@
 from typing import List
 from datetime import datetime
 
-from models.Venda import Venda
-from models.Medicamento import Medicamento
-from models.Cliente import Cliente
+from model.Venda import Venda
+from model.Medicamento import Medicamento
+from model.Cliente import Cliente
 from database.Core import FarmaciaFileDB
 
 

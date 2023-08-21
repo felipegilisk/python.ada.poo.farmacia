@@ -1,7 +1,7 @@
 import os
 
 from database.Core import FarmaciaFileDB
-from models.Medicamento import Medicamento
+from model.Medicamento import Medicamento
 from view.CLI import print_drug_header, print_footer_divider, drug_top_header
 
 

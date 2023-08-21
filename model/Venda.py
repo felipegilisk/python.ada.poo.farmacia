@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import List
 
-from models.Cliente import Cliente
-from models.Medicamento import Medicamento
+from model.Cliente import Cliente
+from model.Medicamento import Medicamento
 
 
 class Venda:

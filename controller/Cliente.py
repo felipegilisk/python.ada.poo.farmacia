@@ -1,7 +1,7 @@
 from datetime import datetime, date
 
 from database.Core import FarmaciaFileDB
-from models.Cliente import Cliente
+from model.Cliente import Cliente
 
 
 class ClienteController:

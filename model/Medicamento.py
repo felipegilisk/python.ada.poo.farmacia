@@ -1,4 +1,4 @@
-from models.Laboratorio import Laboratorio
+from model.Laboratorio import Laboratorio
 
 
 class Medicamento:

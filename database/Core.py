@@ -3,10 +3,10 @@ import os
 from time import sleep
 from typing import Tuple, List
 
-from models.Cliente import Cliente
-from models.Laboratorio import Laboratorio
-from models.Medicamento import Medicamento
-from models.Venda import Venda
+from model.Cliente import Cliente
+from model.Laboratorio import Laboratorio
+from model.Medicamento import Medicamento
+from model.Venda import Venda
 
 
 class FarmaciaFileDB:
