@@ -1,3 +1,6 @@
+def print_drug_header() -> None:
+    print("|   ID   |              Nome              | Receita Obrigatória | Valor Unitário |   Tipo   |")
+
 
 def menu_interno(opcao: str):
     """
@@ -5,10 +8,9 @@ def menu_interno(opcao: str):
     """
     switch_opcao = {
         '1': 'Clientes',                        1: 'Clientes',
-        '2': 'Medicamentos Quimioterápicos',    2: 'Medicamentos Quimioterápicos',
-        '3': 'Medicamentos Fitoterápicos',      3: 'Medicamentos Fitoterápicos',
-        '4': 'Vendas',                          4: 'Vendas',
-        '5': 'Emitir Relatório',                5: 'Emitir Relatório'
+        '2': 'Medicamentos',                    2: 'Medicamentos',
+        '3': 'Vendas',                          3: 'Vendas',
+        '4': 'Emitir Relatório',                4: 'Emitir Relatório'
     }
 
     menu_atual = f""" ::: Menu {switch_opcao.get(opcao)} :::
