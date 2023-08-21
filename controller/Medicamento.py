@@ -94,15 +94,17 @@ class MedicamentoController:
             tipo_medicamento = input(
                 'Qual o tipo de medicamento a ser cadastrado? F para Fitoterápico, Q para Quimioterápico.: '
             ).upper()
-            if len(tipo_medicamento) == 0 or valor != "F" or valor != "Q":
+            if len(tipo_medicamento) == 0 or (tipo_medicamento != "F" and tipo_medicamento != "Q"):
                 print("Valor inválido!")
 
         necessita_receita = input('O remédio necessita de receita? Digite S para Sim ou N para Não: ')
         receita_necessaria = True if necessita_receita == "S" else False
 
         identificador = self._db.gen_new_data_idx(target_db="medicamentos")
-        novo_medicamento = Medicamento(identificador, nome, principal_composto, laboratorio, descricao, valor,
-                                       receita_necessaria, tipo_medicamento)
+        novo_medicamento = Medicamento(
+            identificador, nome, principal_composto, laboratorio,
+            descricao, valor, receita_necessaria, tipo_medicamento
+        )
 
         self._db.write(data=novo_medicamento)
         print(f"Medicamento cadastrado com sucesso! Código: {identificador}.")
