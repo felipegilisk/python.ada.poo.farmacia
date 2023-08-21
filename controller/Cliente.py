@@ -61,7 +61,7 @@ class ClienteController:
         while not isinstance(data_nascimento, date):
             data_nascimento = input("Digite a data de nascimento do cliente (dd/mm/aaaa): ")
             try:
-                data_nascimento = datetime.strptime(data_nascimento, "%d/%m/%Y")
+                data_nascimento = datetime.strptime(data_nascimento, "%d/%m/%Y").date()
             except (ValueError, TypeError):
                 print("Data de nascimento inválida!")
 
