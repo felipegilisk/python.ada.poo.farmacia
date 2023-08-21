@@ -53,12 +53,8 @@ class Medicamento:
         self._principal_composto = principal_composto
 
     @property
-    def laboratorio(self) -> Laboratorio:
+    def laboratorio(self) -> Laboratorio | str:
         return self._laboratorio
-
-    @laboratorio.setter
-    def laboratorio(self, laboratorio: Laboratorio) -> None:
-        self._laboratorio = laboratorio
 
     @property
     def descricao(self) -> str:
@@ -121,7 +117,7 @@ class Medicamento:
             "identificador": self.identificador,
             "nome": self.nome,
             "principal_composto": self.principal_composto,
-            "laboratorio": self.laboratorio,
+            "laboratorio": self.laboratorio.nome if type(self.laboratorio) is not str else self.laboratorio,
             "descricao": self.descricao,
             "valor_unitario": self.valor,
             "receita_necessaria": self.receita_necessaria,
