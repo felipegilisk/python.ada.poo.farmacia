@@ -60,7 +60,10 @@ class FarmaciaFileDB:
         if target_db not in self._mapping.keys():
             raise ValueError(f"FarmáciaDB | Busca >> A base de dados \"{target_db}\" não existe.")
 
-        new_data_idx = f"{max(map(int, self._data[target_db].keys())) + 1}"
+        if len(self._data[target_db].keys()) == 0:
+            new_data_idx = 0
+        else:
+            new_data_idx = f"{max(map(int, self._data[target_db].keys())) + 1}"
         return new_data_idx
 
     def _map_new_data(self, staged_data: Cliente | Laboratorio | Medicamento | Venda) -> Tuple[str, dict]:
