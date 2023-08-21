@@ -1,0 +1,82 @@
+{
+    "1":{
+        "identificador": "1",
+        "nome":"Camomilina",
+        "principal_composto":"Camomila",
+        "laboratorio":"TheraSkin",
+        "descricao":"Cicatrizante com ação anti-inflamatória",
+        "valor_unitario":20.3,
+        "receita_necessaria":false,
+        "tipo_medicamento":"F"
+    },
+    "2":{
+        "identificador": "2",
+        "nome":"Vick Vaporub",
+        "principal_composto":"Eucalipto",
+        "laboratorio":"PROCTER & GAMBLE",
+        "descricao":"Expectorante e broncodilatador",
+        "valor_unitario":14.99,
+        "receita_necessaria":false,
+        "tipo_medicamento":"F"
+    },
+    "3":{
+        "identificador": "3",
+        "nome":"Casca de Salgueiro Branco",
+        "principal_composto":"Salgueiro",
+        "laboratorio":"Farmacam",
+        "descricao":"Alivio das articulações e conforto muscular",
+        "valor_unitario":10.15,
+        "receita_necessaria":false,
+        "tipo_medicamento":"F"
+    },
+    "4":{
+        "identificador": "4",
+        "nome":"Aloe vera extrato",
+        "principal_composto":"Babosa",
+        "laboratorio":"Bryo",
+        "descricao":"Cicatrizante com ação anti-inflamatória",
+        "valor_unitario":11.0,
+        "receita_necessaria":false,
+        "tipo_medicamento":"F"
+    },
+    "5":{
+        "identificador": "5",
+        "nome":"Genuxal",
+        "principal_composto":"Ciclofosfamida",
+        "laboratorio":"Baxter",
+        "descricao":"Tratamento de tumores malígnos e doenças do sistema imunológico",
+        "valor_unitario":69.0,
+        "receita_necessaria":true,
+        "tipo_medicamento":"Q"
+    },
+    "6":{
+        "identificador": "6",
+        "nome":"Taxol",
+        "principal_composto":"Paclitaxel",
+        "laboratorio":"Bristol-Myers Squibb",
+        "descricao":"Tratamento adjuvante do câncer de mama linfonodo positivo",
+        "valor_unitario":81.0,
+        "receita_necessaria":false,
+        "tipo_medicamento":"Q"
+    },
+    "7":{
+        "identificador": "7",
+        "nome":"Gemzar",
+        "principal_composto":"Cloridrato de gencitabina",
+        "laboratorio":"EUROFARMA",
+        "descricao":"Tratamento de pacientes com câncer de bexiga e adenocarcinoma do pâncreas",
+        "valor_unitario":413.0,
+        "receita_necessaria":true,
+        "tipo_medicamento":"Q"
+    },
+    "8":{
+        "identificador": "8",
+        "nome":"Norelbin",
+        "principal_composto":"Vinorelbina",
+        "laboratorio":"EUROFARMA",
+        "descricao":"Tratamento de recidiva de câncer de mama",
+        "valor_unitario":186.0,
+        "receita_necessaria":false,
+        "tipo_medicamento":"Q"
+    }
+}
