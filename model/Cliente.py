@@ -68,7 +68,7 @@ class Cliente:
         return self._idade
 
     @staticmethod
-    def _formatar_data_nascimento(data_nascimento: date | str) -> date:
+    def _formatar_data_nascimento(data_nascimento: datetime | date | str) -> date:
         """
         Método para formatar automaticamente a data de nascimento informada para o objeto Cliente.
 
@@ -80,6 +80,8 @@ class Cliente:
         """
         if type(data_nascimento) is date:
             return data_nascimento
+        if type(data_nascimento) is datetime:
+            return data_nascimento.date()
 
         try:
             fmt_data_nascimento = datetime.strptime(data_nascimento, "%Y-%m-%d")
