@@ -114,7 +114,8 @@ class Venda:
         Returns:
             str: Informações da Venda formatadas para exibição.
         """
-        valor_fmt_str = f"{self._valor_venda:.2f :>8}".replace('.', ',')
+        valor_str = f"{self._valor_venda:.2f}".replace('.', ',')
+        valor_fmt_str = f"{valor_str :>8}"
         data_hora_venda = self.momento_venda.date().strftime("%d/%m/%y %H:%M:%S")
         produtos_str = "".join([produto.__str__() for produto in self.produtos])
 
