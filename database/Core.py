@@ -1,6 +1,7 @@
 import json
 import os
-from time import sleep
+from copy import deepcopy
+from datetime import datetime
 from typing import Tuple, List
 
 from model.Cliente import Cliente
@@ -16,7 +17,8 @@ class FarmaciaFileDB:
         self._mapping = self._retrieve_data_mapping()
         self._data = self._load_persistent_data()
 
-        self._remap_data()
+        self._remap_data_phase_1()
+        self._remap_data_phase_2()
 
     def _retrieve_data_mapping(self) -> dict:
         data_mapping = {
@@ -93,7 +95,30 @@ class FarmaciaFileDB:
 
         return target_db, final_staged_data
 
-    def _remap_data(self) -> None:
+    def _remap_data_phase_2(self) -> None:
+        remapped_sell_db = {}
+        sell_database = deepcopy(self._data["vendas"])
+        if len(sell_database.keys()) > 0:
+            for idx in sell_database.keys():
+                produtos = [
+                    produto for produto in [
+                        self.search(
+                            target_db="medicamentos", target_field="identificador", search_value=prod_id, lazy_mode=False
+                        ) for prod_id in sell_database[idx]["produto_ids"]
+                    ]
+                ]
+                cliente = self.search(
+                    target_db="clientes", target_field="cpf", search_value=sell_database[idx]["cliente"], lazy_mode=False
+                )
+                momento_venda = datetime.strptime(sell_database[idx]["momento_venda"], "%Y-%m-%d %H:%M:%S")
+                remapped_sell_db[idx] = Venda(momento_venda, produtos, cliente)
+
+            self._data["vendas"] = remapped_sell_db
+
+        print(f"FileDB Engine | Inicialização (Fase 2) >> Remapeamento final da base de dados bem-sucedida.")
+        os.system("clear" if os.name != "nt" else "cls")
+
+    def _remap_data_phase_1(self) -> None:
         print(f"FileDB Engine | Inicialização >> Executando remapeamento de objetos para a base de dados em memória.")
         for target_db in self._mapping.keys():
             if target_db == "vendas":
@@ -108,8 +133,7 @@ class FarmaciaFileDB:
 
             self._data[target_db] = mapped_db
 
-        print(f"FileDB Engine | Inicialização >> Remapeamento da base de dados bem-sucedida.")
-        os.system("clear" if os.name != "nt" else "cls")
+        print(f"FileDB Engine | Inicialização (Fase 1) >> Remapeamento da base de dados bem-sucedida.")
 
     @staticmethod
     def _remap_for_write(data: dict) -> dict:
