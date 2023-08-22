@@ -117,7 +117,7 @@ class Venda:
         valor_str = f"{self._valor_venda:.2f}".replace('.', ',')
         valor_fmt_str = f"{valor_str :>8}"
         data_hora_venda = self.momento_venda.date().strftime("%d/%m/%y %H:%M:%S")
-        produtos_str = "".join([produto.__str__() for produto in self.produtos])
+        produtos_str = "\n".join([produto.__str__() for produto in self.produtos])
 
         fmt_str = (
             "|-----------------------------------------------------------------------------------------|\n"
@@ -125,7 +125,7 @@ class Venda:
             "|-----------------------------------------------------------------------------------------|\n"
             "|                                         Cliente                                         |\n"
             "|-----------------------------------------------------------------------------------------|\n"
-            f"| CPF: {self.cliente.cpf :<49} Data/Hora: {data_hora_venda} |\n"
+            f"| CPF: {self.cliente.cpf :<53} Data/Hora: {data_hora_venda} |\n"
             "|-----------------------------------------------------------------------------------------|\n"
             "|                                    Produtos Vendidos                                    |\n"
             "|-----------------------------------------------------------------------------------------|\n"
