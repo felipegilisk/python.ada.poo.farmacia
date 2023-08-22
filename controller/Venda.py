@@ -23,7 +23,7 @@ class VendaController:
         nova_venda = Venda(momento_venda, produtos, cliente)
         self._db.write(data=nova_venda)
 
-        nova_venda.__str__()
+        print(nova_venda.__str__())
         print('Venda realizada com sucesso!! ')
 
     def emitir_relatorio_de_vendas(self) -> None:
