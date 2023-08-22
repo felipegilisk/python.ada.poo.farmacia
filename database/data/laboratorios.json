@@ -1,0 +1,51 @@
+{
+    "1":{
+        "nome":"Bryo",
+        "telefone":11975546464,
+        "endereco":"Avenida Cem, S\/N",
+        "cidade":"Serra",
+        "estado":"ES"
+    },
+    "2":{
+        "nome":"TheraSkin",
+        "telefone":8000196660,
+        "endereco":"Marginal Direita da, Rod. Anchieta, Km 13,5",
+        "cidade":"Rudge Ramos",
+        "estado":"SP"
+    },
+    "3":{
+        "nome":"Baxter",
+        "telefone":1156350106,
+        "endereco":"Avenida Engenheiro Eusébio Stevaux, 2555",
+        "cidade":"São Paulo",
+        "estado":"SP"
+    },
+    "4":{
+        "nome":"Bristol-Myers Squibb",
+        "telefone":8007276160,
+        "endereco":"Rua Verbo Divino, 1711",
+        "cidade":"São Paulo",
+        "estado":"SP"
+    },
+    "5":{
+        "nome":"PROCTER & GAMBLE",
+        "telefone":1137480327,
+        "endereco":"Av. Maria Coelho Aguiar, 215",
+        "cidade":"São Paulo",
+        "estado":"SP"
+    },
+    "6":{
+        "nome":"Farmacam",
+        "telefone":2126051349,
+        "endereco":"Rua Coronel Serrado, 1630",
+        "cidade":"São Gonçalo",
+        "estado":"RJ"
+    },
+    "7":{
+        "nome":"EUROFARMA",
+        "telefone":8007043876,
+        "endereco":"Rua Brito Peixoto, 554",
+        "cidade":"São Paulo",
+        "estado":"SP"
+    }
+}
